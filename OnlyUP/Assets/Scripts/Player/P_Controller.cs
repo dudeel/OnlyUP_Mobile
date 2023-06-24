@@ -46,7 +46,7 @@ public class P_Controller : MonoBehaviour
 
     // player
     private float _speed;
-    private float _animationBlend;
+    //private float _animationBlend;
     private float _targetRotation = 0.0f;
     private float _rotationVelocity;
     private float _verticalVelocity;
@@ -57,12 +57,12 @@ public class P_Controller : MonoBehaviour
     private float _fallTimeoutDelta;
 
     // animation IDs
-    private int _animIDSpeed;
-    private int _animIDGrounded;
-    private int _animIDJump;
-    private int _animIDFreeFall;
-    private int _animIDMotionSpeed;
-    private Animator _animator;
+    // private int _animIDSpeed;
+    // private int _animIDGrounded;
+    // private int _animIDJump;
+    // private int _animIDFreeFall;
+    // private int _animIDMotionSpeed;
+    // private Animator _animator;
     private CharacterController _controller;
     private StarterAssetsInputs _input;
     private GameObject _mainCamera;
@@ -79,7 +79,7 @@ public class P_Controller : MonoBehaviour
     {
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
         
-        _animator =GetComponent<Animator>();
+        //_animator =GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         _input = GetComponent<StarterAssetsInputs>();
 
@@ -115,6 +115,7 @@ public class P_Controller : MonoBehaviour
         //_animator.SetBool(_animIDGrounded, Grounded);
     }
 
+    public Vector3 inputDirection;
     private void Move()
     {
         //установите целевую скорость на основе скорости перемещения, скорости спринта и нажатия кнопки sprint
@@ -141,11 +142,11 @@ public class P_Controller : MonoBehaviour
         }
         else _speed = targetSpeed;
 
-        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-        if (_animationBlend < 0.01f) _animationBlend = 0f;
+        // _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+        // if (_animationBlend < 0.01f) _animationBlend = 0f;
 
         //Нормализовать направление движения
-        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+        inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
         // примечание: Оператор Vector2 != использует аппроксимацию, поэтому не подвержен ошибкам с плавающей запятой и дешевле, чем величина
         // если есть ввод перемещения, поверните проигрыватель, когда он движется

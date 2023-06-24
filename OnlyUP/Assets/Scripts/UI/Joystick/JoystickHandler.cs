@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 public class JoystickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     //Данные джойстика
+    [SerializeField] protected Image joystickArea;
     [SerializeField] protected Image joystickBackground;
     [SerializeField] protected Image joystick;
-    [SerializeField] protected Image joystickArea;
     [SerializeField] protected float range;
 
     //Начальная позиция джойстика
