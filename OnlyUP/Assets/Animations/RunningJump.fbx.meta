@@ -9,7 +9,12 @@ ModelImporter:
   - first:
       74: -8357826442474757338
     second: RunningJump
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch43_Body
+    second: {fileID: 2100000, guid: cb3b25ac425e907458377a44ba70f74a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
