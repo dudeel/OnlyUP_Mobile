@@ -15,7 +15,7 @@ public class ParkourSystem : MonoBehaviour
         if (other.transform.gameObject.transform.tag == "ClimbTrigger")
         {
             _isClimbObject = true;
-            _objectPosition = other.transform.position;
+            _objectPosition = other.transform.position - new Vector3(0, 0.67f, 0);
         }
     }
 
