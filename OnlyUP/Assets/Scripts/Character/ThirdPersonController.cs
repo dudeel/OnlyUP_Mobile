@@ -132,6 +132,8 @@ public class ThirdPersonController : MonoBehaviour
 
         _jumpTimeoutDelta = JumpTimeout;
         _fallTimeoutDelta = FallTimeout;
+
+        Application.targetFrameRate = 60;
     }
 
     private void Update()
