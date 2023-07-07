@@ -7,10 +7,16 @@ public class UI_Timer : MonoBehaviour
     [SerializeField] private int second = 0;
     [SerializeField] private int minutes = 0;
     [SerializeField] private TextMeshProUGUI textTimer;
+    public bool onPaused = false;
 
     private void Awake()
     {
         textTimer = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        StartTimer();
+    }
+
+    private void OnEnable()
+    {
         StartTimer();
     }
 
@@ -19,22 +25,31 @@ public class UI_Timer : MonoBehaviour
         StartCoroutine(Timer());
     }
 
+    public void RestartTimer()
+    {
+        second = 0;
+        minutes = 0;
+    }
+
     IEnumerator Timer()
     {
         while (true)
         {
-            if (second == 59)
+            if (!onPaused)
             {
-                minutes++;
-                second = -1;
-            }
+                if (second == 59)
+                {
+                    minutes++;
+                    second = -1;
+                }
 
-            second++;
-            
-            if (second < 10)
-                textTimer.SetText($"{minutes}:0{second}");
-            else
-                textTimer.SetText($"{minutes}:{second}");
+                second++;
+                
+                if (second < 10)
+                    textTimer.SetText($"{minutes}:0{second}");
+                else
+                    textTimer.SetText($"{minutes}:{second}");
+            }
 
             yield return new WaitForSeconds(1f);
         }
