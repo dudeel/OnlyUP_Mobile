@@ -6,11 +6,17 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     [SerializeField] private string _androidGameId = "5336772";
     [SerializeField] private string _iOSGameId = "5336773";
     [SerializeField] private bool _testMode = false;
+    public int isRemoveAds = 0;
     
     private string _gameId;
 
     void Awake()
     {
+        if (PlayerPrefs.HasKey("removeads")) isRemoveAds = PlayerPrefs.GetInt("removeads");
+        else isRemoveAds = 0;
+
+        if (isRemoveAds == 1) return;
+
         InitializeAds();
     }
 

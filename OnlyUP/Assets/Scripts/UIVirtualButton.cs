@@ -15,12 +15,12 @@ public class UIVirtualButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        OutputButtonStateValue(false);
+        OutputButtonStateValue(true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        OutputButtonStateValue(true);
+        OutputButtonStateValue(false);
     }
     
     public void OnPointerClick(PointerEventData eventData)

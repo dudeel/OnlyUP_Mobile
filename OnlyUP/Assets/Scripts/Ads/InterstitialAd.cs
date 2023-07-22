@@ -9,9 +9,15 @@ public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
     [SerializeField] private string _iOSAdUnitId = "Interstitial_iOS";
     
     private string _adUnitId;
+    public int isRemoveAds = 0;
 
     void Awake()
     {
+        if (PlayerPrefs.HasKey("removeads")) isRemoveAds = PlayerPrefs.GetInt("removeads");
+        else isRemoveAds = 0;
+
+        if (isRemoveAds == 1) return;
+
         S = this;
 
         // Get the Ad Unit ID for the current platform:

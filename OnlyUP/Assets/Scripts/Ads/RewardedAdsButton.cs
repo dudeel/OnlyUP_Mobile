@@ -11,9 +11,15 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] private string _iOSAdUnitId = "Rewarded_iOS";
     
     private string _adUnitId;
+    public int isRemoveAds = 0;
 
     private void Awake()
     {
+        if (PlayerPrefs.HasKey("removeads")) isRemoveAds = PlayerPrefs.GetInt("removeads");
+        else isRemoveAds = 0;
+
+        if (isRemoveAds == 1) return;
+
         // Get the Ad Unit ID for the current platform:
         _adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? _iOSAdUnitId

@@ -9,14 +9,26 @@ public class UI_Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textTimer;
     public bool onPaused = false;
 
+    public void SetPause()
+    { //onPaused = true; 
+    }
+
+    public void UnsetPause()
+    { //onPaused = false; 
+    }
+
     private void Awake()
     {
         textTimer = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        StartTimer();
     }
 
     private void OnEnable()
     {
+        second++;
+        if (second < 10)
+            textTimer.SetText($"{minutes}:0{second}");
+        else
+            textTimer.SetText($"{minutes}:{second}");
         StartTimer();
     }
 
@@ -35,6 +47,8 @@ public class UI_Timer : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(1f);
+
             if (!onPaused)
             {
                 if (second == 59)
@@ -50,8 +64,6 @@ public class UI_Timer : MonoBehaviour
                 else
                     textTimer.SetText($"{minutes}:{second}");
             }
-
-            yield return new WaitForSeconds(1f);
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    [SerializeField] private WaypointPath _waypointPath;
+    public WaypointPath _waypointPath;
     [SerializeField] private float _speed;
     private int _targetWaypointIndex;
     private Transform _previousWaypoint;
@@ -16,6 +16,7 @@ public class MovingObject : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isStarted) return;
+        if (!isTouchPlayer && _waypointPath.GetNextWaypointIndex(_targetWaypointIndex) == 2) Destroy(gameObject);
 
         _elapsedTime += Time.fixedDeltaTime;
 

@@ -5,9 +5,15 @@ public class AdsManager : MonoBehaviour
 {
 
     [SerializeField] private CharacterController _controller;
+    public int isRemoveAds = 0;
 
     private void Start()
     {
+        if (PlayerPrefs.HasKey("removeads")) isRemoveAds = PlayerPrefs.GetInt("removeads");
+        else isRemoveAds = 0;
+        
+        if (isRemoveAds == 1) return;
+
         InterstitialAd.S.LoadAd();
         StartCoroutine(TimerAds());
     }

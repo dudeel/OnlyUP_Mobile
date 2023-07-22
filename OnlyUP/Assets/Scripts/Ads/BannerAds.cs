@@ -8,11 +8,17 @@ public class BannerAds : MonoBehaviour
 
     [SerializeField] private string _androidAdUnitId = "Banner_Android";
     [SerializeField] private string _iOSAdUnitId = "Banner_iOS";
+    public int isRemoveAds = 0;
     
     private string _adUnitId;
 
     private void Awake()
     {
+        if (PlayerPrefs.HasKey("removeads")) isRemoveAds = PlayerPrefs.GetInt("removeads");
+        else isRemoveAds = 0;
+
+        if (isRemoveAds == 1) return;
+
         // Get the Ad Unit ID for the current platform:
         _adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? _iOSAdUnitId
@@ -21,9 +27,10 @@ public class BannerAds : MonoBehaviour
 
     private void Start()
     {
+
+        if (isRemoveAds == 1) return;
         // Set the banner position:
         Advertisement.Banner.SetPosition(_bannerPosition);
-        LoadBanner();
         StartCoroutine(LoadAdBanner());
     }
 
