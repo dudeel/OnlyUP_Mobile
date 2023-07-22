@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class JoystickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
+    [System.Serializable]
+    public class Event : UnityEvent<Vector2> { }
+    public Event joystickOutputEvent;
+
     //Данные джойстика
     [SerializeField] protected Image joystickBackground;
     [SerializeField] protected Image joystick;
@@ -43,6 +48,8 @@ public class JoystickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
             joystick.rectTransform.anchoredPosition = new Vector2(inputVector.x * (joystickBackground.rectTransform.sizeDelta.x / 2), 
                                                                                     inputVector.y * (joystickBackground.rectTransform.sizeDelta.y / 2));
+
+            OutputPointerEventValue(inputVector);
         }
     }
 
@@ -64,6 +71,7 @@ public class JoystickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
         inputVector = Vector2.zero;
         joystick.rectTransform.anchoredPosition = Vector2.zero;
+        OutputPointerEventValue(Vector2.zero);
     }
 
     //Изменение прозрачности джойстика
@@ -79,5 +87,10 @@ public class JoystickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
             joystick.color = new Color (255f, 255f, 255f, 1f);
             joystickIsActive = false;
         }
+    }
+
+    private void OutputPointerEventValue(Vector2 pointerPosition)
+    {
+        joystickOutputEvent.Invoke(pointerPosition);
     }
 }
